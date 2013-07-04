@@ -1,0 +1,48 @@
+/* CSS Document */
+
+<!--
+
+#menu_wrapper{
+	position:relative;
+	width: 150px;
+	float:left;
+	overflow:auto;
+}
+
+#menu_spacer{
+	position:relative;
+	height: 80px;
+	width: 20px;
+	float:left;
+
+}
+
+#menu_top{
+	background:url(/images/menu_150_top.png);
+	position:relative;
+	width: 150px;
+	height:22px;
+	float:left;
+}
+
+#menu_middle{
+	background:url(/images/menu_150_center.png) repeat-y;
+	position:relative;
+	width: 120px;
+	float:left;
+	padding-left:15px;
+	padding-right:15px;
+}
+
+#menu_bottom{
+	background:url(/images/menu_150_bottom.png);
+	position:relative;
+	width: 150px;
+	height:22px;
+	float:left;
+}
+
+
+
+	
+-->

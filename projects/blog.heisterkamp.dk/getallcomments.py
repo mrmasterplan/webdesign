@@ -1,0 +1,29 @@
+#!/usr/bin/python
+
+import _mysql
+#import cgi
+import cgitb; cgitb.enable()
+from MySQLdb.constants import FIELD_TYPE
+
+my_conv = {FIELD_TYPE.INT24: int}
+
+db=_mysql.connect(host="localhost",user="simonhe",passwd="masterM",db="simonhe",conv=my_conv)
+
+#form = cgi.FieldStorage()
+
+db.query("""SELECT * FROM blog_comments WHERE 1""" )
+r=db.store_result()
+all_rows= r.fetch_row(how=1,maxrows=0)
+
+print "Content-type: text/xml\n"
+print '<?xml version="1.0" encoding="UTF-8"?>'
+print "<all>"
+
+for row in all_rows:
+    print "<comment>"
+    for tag,value in row.iteritems():
+        print """<%s>%s</%s>"""%(tag,value,tag)
+    print "</comment>"
+print "</all>"
+
+

@@ -1,0 +1,28 @@
+<div class="entry">
+	<div class="entry_title">
+		<a name="{{entry.datelink}}"><h3 class="entry-title">{{entry.title}}, {{entry.nicedate}}</h3></a>
+	</div><!-- closes entry title-->
+	{% if isadmin %}
+	<div class="entry-link-sec">
+		<a class="entry-link-update small-purple" href="/new-blog-entry?update={{entry.id_key}}">edit</a>
+		<a class="entry-link-remove small-purple" href="/remove?id={{entry.id_key}}">remove</a>
+	</div><!-- closes entry-link-sec -->
+	{% endif %}
+	<div class="entry_body">
+		{{entry.body}}
+	</div>
+	<div class="entry_botsec">
+		<div class="entry_btt_link">
+			<a href="#top">Back to top.</a>
+		</div>
+		<!--      <div class="rating" id="rate_%s" name="%s"></div>-->
+		<div class="comment-section">
+			<div class="comment_section_title">
+				Comments:
+			</div>
+			{{entry.comments }}
+			
+		</div>
+	</div>
+	<hr/>
+</div>

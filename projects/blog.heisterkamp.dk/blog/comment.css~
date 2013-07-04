@@ -1,0 +1,38 @@
+<!--
+
+div.comment-link-container{
+}
+.invisible{
+	visibility:hidden;
+	height:0px;
+	width:0px;
+}
+
+span.comment-heading{
+	font-family: Arial, Helvetica, sans-serif;
+        font-size:x-small;
+	color:#330066;
+}
+span.comment-user{
+
+}
+div.comment{
+	padding-left:20px;
+	padding-bottom:0px;
+}
+
+
+a.comment-link-comment{
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:xx-small;
+	color:#330066;
+	font-weight:bold;
+}
+
+div.comment-submit-container{
+	overflow:auto;
+	
+}
+
+-->

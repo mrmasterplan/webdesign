@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head>
+<link rel="SHORTCUT ICON" href="/images/browser_icon_S.png">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+<title>My Blog (google app preliminary version)</title>
+
+<link href="/stylesheets/page.css" rel="stylesheet" type="text/css" />
+<script src="/scripts/jquery.js" txpe="text/javascript"></script>
+{% block header %}
+
+{% endblock header %}
+
+</head>
+<body>
+	<a name="top"></a>
+	<div id="page">
+		<div id="page_top"></div>
+		<div id="page_middle">
+			<div id="head_wrapper">
+				<a class="nomarklink" href="/" title="Back to Main Page">
+					<div id="headsec">
+						<h1 align=center>SIMON's BLOG!</h1>
+					</div>
+				</a>
+			</div>
+			<div id="main_wrapper">
+			{% block main %}
+			{% endblock main %}
+			</div><!--end div main_wrapper-->
+			<div id="botsec">
+				<hr/>
+				<a href="mailto:admin@SPAMNOTheisterkamp.dk?body=Remember%20to%20remove%20the%20SPAMNOT%20part%20from%20the%20mail%20adress.%20Thanks">Contact the blog administrator</a>
+			</div>
+		</div><!--end div page_middle-->
+		<div id="page_bottom"></div>
+		</div><!-- end page -->
+</body>
+</html>

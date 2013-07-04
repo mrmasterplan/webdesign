@@ -1,0 +1,78 @@
+/* CSS Document */
+
+<!--
+#menu_spacer{
+	position:relative;
+	height: 80px;
+	width: 20px;
+	float:left;
+
+}
+
+#menu_wrapper{
+	background: url(/images/menu_back.png) repeat;
+	position:relative;
+	float:left;
+	overflow:auto;
+	padding:5px;
+	border:medium solid rgb(150,150,150);
+}
+
+#menu_top{
+	overflow:auto;
+	position:relative;
+}
+
+#menu_corner_tl{
+	float:left;
+	position:relative;
+}
+
+#menu_corner_tr{
+	float:right;
+	position:relative;
+}
+
+
+#menu_middle{
+	overflow:auto;
+	position:relative;
+}
+
+#menu_l{
+/*	background:url(/images/menu_l.png) repeat-y;
+	width: 10px;*/
+	float:left;
+	position:relative;
+}
+
+#menu_r{
+/*	background:url(/images/menu_r.png) repeat-y;
+	width: 10px;*/
+	float:right;
+	position:relative;
+}
+
+#menu_body{
+	float:left;
+	position:relative;
+}
+
+
+#menu_bottom{
+	position:relative;
+}
+
+
+#menu_corner_bl{
+	float:left;
+	position:relative;
+}
+
+#menu_corner_br{
+	float:right;
+	position:relative;
+}
+
+	
+-->

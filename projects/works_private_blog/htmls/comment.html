@@ -1,0 +1,69 @@
+<div class="comment">
+<!--commment body-->
+	{% block comment_heading %}
+	<div class="comment-heading">
+		<span class="commment-heading">
+			<span class="comment-user">
+				{% if usernick %}
+				{{usernick}}
+				{% else %}
+				Anonymous
+				{% endif %}
+			</span> 
+		says:
+		</span>
+	</div>
+	{% endblock comment_heading %}
+	<div class="comment-rest-container">
+		<div class="comment-comment-container">
+			
+			{% block comment_link_container %}
+			<div class="comment-link-container invisible">
+				<a href="#" class="comment-link-comment invisible small-purple">comment</a>
+				{% if isowner %}
+				<a href="#" class="comment-link-edit invisible small-purple">edit</a>
+				{% endif %}
+				{% if isadmin %}
+				<a href="/remove?id={{id_key}}" class="comment-link-remove invisible small-purple">remove</a>
+				{% endif %}
+			</div>
+			{% endblock comment_link_container %}
+			
+			{% block comment_body %}
+			<div class ="comment_body">
+				<pre>{{body|escape|linebreaks}}</pre>
+			</div>	
+			{% endblock comment_body %}
+			
+			{% block comment_edit_n_comment %}
+			{% if isowner %}
+			<div class="comment-edit-container invisible">
+				<form class="comment-edit-form comment-form" action="/submit-comment" method="post">
+					<div>
+						<textarea class="editarea" name="commentbody" type="text" rows="3" cols="39">{{body}}</textarea>
+					</div>
+					<input name="edit" type="hidden" value="yes">
+					<input name="commentupon" type="hidden" value="{{id_key}}">
+					<div>
+						<input class="comment-submit-button" type="submit" value="update">
+					</div>
+				</form>
+			</div>
+			{% endif%}
+			<div class="comment-submit-container">
+				<form class="comment-submit-form comment-form" action="javascript:return false;" method="post"><!--"/submit-comment"-->
+					<div>
+						<textarea class="submitarea" name="commentbody" type="text" rows="3" cols="39"></textarea>
+					</div>
+					<input name="commentupon" type="hidden" value="{{id_key}}">
+					<div>
+						<input class="comment-submit-button" type="submit" value="submit">
+					</div>
+				</form>
+			</div>
+			{% endblock comment_edit_n_comment %}
+		</div>
+		
+	{{daughter_string}}
+	</div>
+</div>

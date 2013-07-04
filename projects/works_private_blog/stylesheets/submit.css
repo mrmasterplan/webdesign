@@ -1,0 +1,50 @@
+<!--
+
+#head_wrapper{
+	position:relative;
+	width: 750px;
+	height:100px;
+}
+
+#headsec{
+	float:left;
+	width: 450px;
+	height:100px;
+	padding-left:60px;
+}
+
+#main_wrapper{
+	width: 750px;
+	position:relative;
+	overflow:auto;
+	}
+
+#submit-form {
+	position:relative;
+	width: 450px;
+	float:left;
+	font-family:Arial, Helvetica, sans-serif;
+	padding-left:60px;
+	}
+#maintext {
+	position:relative;
+	width: 450px;
+	float:left;
+	font-family:Arial, Helvetica, sans-serif;
+	padding-left:60px;
+	}
+		
+
+#botsec{
+	float:left;
+	position:relative;
+	width: 690px;
+	height:40px;
+	padding-left:30px;
+	padding-right:30px;
+}
+	
+
+	
+-->
+

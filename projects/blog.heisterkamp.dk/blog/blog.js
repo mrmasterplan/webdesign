@@ -1,0 +1,79 @@
+//Start comment injection
+
+$(document).ready(function() {
+	//	  $.post("blog_mod.py",{},function(html){$('body').html(html)});
+	// generate markup
+	
+	
+	$("div.rating").append("Please rate: ");
+	
+	
+	for ( var j = 1; j <= 5; j++ ){  //>
+	    $("div.rating").each(function(i){$(this).append("<a href='#' name='" + $(this).attr('name') + "'>" + j + "</a> ");});
+	}
+	
+	
+	// add markup to container and apply click handlers to anchors
+	$("div.rating").find("a").click(function(e){
+		// stop normal link click
+		e.preventDefault();
+		var paren = $(this).parents("div.rating");
+		// send request
+		$.post("rate.py", {rating: $(this).html(), id:$(paren).attr("name")}, function(xml) {
+			// format and output result
+			$(paren).html("Average: " + 
+				      $("average", xml).text() +
+				      ", out of " + 
+				      $("count", xml).text()
+				      );
+		    });
+	    });
+	//Done with rating system
+	//Start loading the comments
+	//	$.ajax({
+	//		type: "GET",
+	//		    url: "getallcomments.py",
+	//		    //data: "name=John&location=Boston",
+	//		    dataType: "xml",
+	//		    success: function(xml){
+	//		    $("comment", xml).each(function(f){ console.log($(this).find('id').text());});
+	//		    
+	//		}
+	//	    });
+
+	$("div.comment-submit-container").addClass("invisible");
+	$("div.comment-link-container").removeClass("invisible");
+
+	$("div.comment-comment-container").each(function(i){
+		//$(this).find("div.comment-submit-container").addClass("invisible");
+		var container = this;
+		$(this).find("a").click(function(e){
+			e.preventDefault();
+			$(container).find("div.comment-submit-container").toggleClass("invisible");
+		    });
+		//		$(this).find("comment-submit-button").click(function(e){
+		//			e.preventDefault();
+		//			$(container).find("div.comment-submit-container").toggleClass("invisible");
+		//		    });
+	    });
+
+	//	$("input[name='js_active']").attr('value','yes');
+	//
+	//	$("form.comment-submit-form").submit(function(){
+	//		if($(this).find("input[name='comment-user']").val().length > 20){
+	//		    aler("User must contain less than 20 characters.");
+	//		    return false;
+	//		}
+	//		if($(this).find("input[name='comment-body']").val().length > 200){
+	//		    aler("Body must contain less than 200 characters.");
+	//		    return false;
+	//		}
+	//		
+	//		
+	//		
+	//		return false;
+	//	    });
+	
+    });
+
+//

@@ -1,0 +1,50 @@
+<p>My friend Morten pointed me towards an excelent library for cross browser graphics recently. It's called <a href="http://raphaeljs.com/">Raphaël</a>. I am now experimentin with it and it really seems pretty easy to use.</p>
+<p>My first experiment is attached to this entry. You can use the mouse to draw in the field below.</p>
+<div id="DrawExArea" style="width: 320px; height: 200px; position: relative; border: medium solid #000000;"></div>
+<script type="text/javascript">
+var paper;
+function DrawExAreaInit(){
+  var drawdiv=$("#DrawExArea");
+  DEAx=drawdiv.position().left;
+  DEAy=drawdiv.position().top;
+  console.log("Start DEAx "+DEAx+" DEAy "+DEAy); 
+  
+  drawdiv.parents().not("html").not("body").not("#page").each(function(i){ 
+  	DEAx+=$(this).position().left; 
+  	DEAy+=$(this).position().top;
+  	console.log("Now DEAx "+DEAx+" DEAy "+DEAy); 
+  });
+
+  DEAy+=$("#page").position().top-64
+  //DEAy+=-64
+  console.log("Now DEAx "+DEAx+" DEAy "+DEAy); 
+
+  var paper = Raphael($("#DrawExArea").get()[0], 320, 200);
+  $(paper.node).css({"position": "relative"});
+
+  var objects = new Array();
+  var MouseisDown=false;
+  var lastpoints=new Array();
+  drawdiv.mousemove(function(event){
+    if(MouseisDown){
+      var oind=objects.length -1;
+      objects[oind].lineTo(event.pageX-DEAx, event.pageY-DEAy);
+      }
+    event.preventDefault();
+
+  });
+  drawdiv.mousedown(function(event){
+    MouseisDown=true;
+    objects.push(paper.path({stroke: "#000"}).moveTo(event.pageX-DEAx, event.pageY-DEAy));
+    lastpoints=new Array();
+    event.preventDefault();
+  });
+  drawdiv.mouseup(function(event){
+    MouseisDown=false;
+  });
+//  drawdiv.mouseout(function(event){MouseisDown=false;});
+}
+
+loadfns.add(DrawExAreaInit);
+
+</script>

@@ -1,0 +1,46 @@
+#!/usr/bin/python
+
+cont_type_html="""Content-type: text/html
+
+"""
+
+import _mysql
+import cgi
+#import cgitb; cgitb.enable()
+from MySQLdb.constants import FIELD_TYPE
+import time
+import datetime
+from blog import blog
+
+#time.mktime(datetime.datetime.now().timetuple())
+def main():
+    now = int(time.mktime(datetime.datetime.now().timetuple()))
+    
+    db=_mysql.connect(host="localhost",user="simonhe",passwd="masterM",db="simonhe")
+    form = cgi.FieldStorage(keep_blank_values=1)
+    
+    if not(form.has_key('js_active') 
+           and form.has_key('comment-user')
+           and form.has_key('comment-body')
+           and form.has_key('entry')
+           and form.has_key('timestamp')
+           and form.has_key('par-id')):
+        blog.main()
+        return
+
+    db.query("""SELECT * FROM blog_comments WHERE entry="%s" AND parent="%s" AND user="%s" AND body="%s" AND timestamp="%s" """ %(form['entry'],form['par-id'],form['comment-user'],form['comment-body']),now)
+    r=db.store_result()
+    if not r.num_rows()==0:
+        blog.main()
+        return
+
+    db.query("""INSERT INTO blog_comments (entry,parent,timestamp,user,body) VALUES ('%s','%s',%s,'%s','%s')""" % (form['entry'],form['par-id'],now,form['comment-user'],form['comment-body']))
+
+    if form['js_active']=='no':
+        blog.main()
+        return
+    else:
+        blog.main()
+        return
+
+#main() 

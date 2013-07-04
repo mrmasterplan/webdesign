@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+<title>Simon's clock designer</title>
+
+<script src="http://www.heisterkamp.dk/scripts/raphael.js" type="text/javascript"></script>
+<script src="http://www.heisterkamp.dk/scripts/jquery.js" type="text/javascript"></script>
+<script src="http://www.heisterkamp.dk/scripts/jQuery_mousewheel_plugin.js" type="text/javascript"></script>
+
+<link href="stylesheets/main.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+paper=0;
+baseSize={width:0,height:0};
+objects=0;
+zoomLevel=0;
+maxZoomLevel=5;
+currZoomFactor=1;
+factorPerZoom=1.6;
+curCoords=0;
+
+$(document).ready(function(){
+	// Creates canvas 320 × 200 at 10, 50
+	baseSize.width=$(window).width();
+	baseSize.height=$(window).height();
+	
+	paper = Raphael(0, 0, baseSize.width, baseSize.height);
+	// Creates circle at x = 50, y = 40, with radius 10
+	objects = new Array();
+	var MouseisDown=false;
+	var lastpoints=new Array();
+	
+	var curCoords={x:$(window).width()/2,y: $(window).height()/2};
+
+	
+	$(window).mousemove(function(event){
+		if(MouseisDown){
+			
+			var oind=objects.length -1;
+			var actualx=event.pageX/currZoomFactor;
+			var actualy=event.pageY/currZoomFactor;
+		
+			objects[oind].xy.push({x : actualx,y : actualy});
+			objects[oind].pa.lineTo(event.pageX, event.pageY);
+		}
+		event.preventDefault();
+	});
+	$(window).mouseup(function(event){
+		MouseisDown=false;
+		//objects[objects.length-1].andClose();
+	});
+
+	$(paper.node).mousedown(function(event){
+		MouseisDown=true;
+		var actualx=event.pageX/currZoomFactor;
+		var actualy=event.pageY/currZoomFactor;
+		
+		var newobject={	xy : new Array({x : actualx, y : actualy}),
+						pa : paper.path({stroke: "#000"}).moveTo(event.pageX, event.pageY)
+					}
+		objects.push(newobject);
+		event.preventDefault();
+		//lastpoints=new Array();
+	});
+	
+	$(window).mousewheel(function(objEvent, intDelta){
+		zoomLevel+=intDelta;
+		
+		if(zoomLevel>=0 && zoomLevel<=maxZoomLevel){
+			//console.log("zoom level now "+zoomLevel);
+			
+			if(intDelta>0){currZoomFactor*=factorPerZoom}
+			else{currZoomFactor/=factorPerZoom};
+			if(zoomLevel==0){currZoomFactor=1};
+			
+			//Scale the canvas
+			paper.setSize(baseSize.width*currZoomFactor, baseSize.height*currZoomFactor);
+			
+			//Scale all objects and scale the position of their centeres
+			//console.log("There are "+objects.length+" objects to redraw");
+			for(oi=0;oi<objects.length;oi++){
+				objects[oi].pa.remove();
+				
+				var xy = objects[oi].xy
+				objects[oi].pa=paper.path({stroke: "#000"}).moveTo(xy[0].x*currZoomFactor,xy[0].y*currZoomFactor);
+				
+				for(xyi=1;xyi<xy.length;xyi++){
+					objects[oi].pa.lineTo(xy[xyi].x*currZoomFactor,xy[xyi].y*currZoomFactor);
+				}
+			}
+			
+			//Scroll
+			var sTx=objEvent.pageX;
+			var sTy=objEvent.pageY;
+			if(intDelta>0){
+				sTx*=factorPerZoom;
+				sTy*=factorPerZoom;
+			}else{
+				sTx/=factorPerZoom;
+				sTy/=factorPerZoom;
+			}
+						
+			sTx-=objEvent.clientX;
+			sTy-=objEvent.clientY;
+			window.scrollTo(sTx,sTy);
+		}
+		else{ 
+			if(zoomLevel<1){zoomLevel=0}
+			else{zoomLevel=maxZoomLevel};
+		}
+		
+		objEvent.preventDefault();
+//		console.log("("+objEvent.clientX+", "+objEvent.clientY+")");
+	});
+});
+
+</script>
+
+</head>
+<body>	
+</body>
+</html>

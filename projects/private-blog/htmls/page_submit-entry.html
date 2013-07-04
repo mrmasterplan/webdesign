@@ -1,0 +1,30 @@
+{% extends "page.html" %}
+
+{% block header %}
+<link href="stylesheets/submit.css" rel="stylesheet" type="text/css" />
+{% endblock header %}
+
+
+{% block main %}
+<div id="submit-form">
+  <div id="advice-sec">
+    <p>
+      Don't forget to html-tag your entry. This is for your own advantage.
+  </p>
+  </div>
+  <form name="new_entry" action="/new-blog-entry" method="POST">
+    <div>Submit new entry:</div>
+    <div>Title:<input name="title" type="text" {% if title %} value="{{title}}" {% endif %} ></div>
+    <!--    <div>Date:<input name="date" type="text" value=""></div>-->
+    <div>
+      <textarea name="body" type="text" rows="25" cols="70" >{{body}}</textarea>
+    </div>
+    {% if entrykey %}
+    <input type="hidden" value="{{entrykey}}" name="entry_key">
+    {% endif %}
+    <input type="submit" value="Go post it">
+  </form>
+  
+</div>
+{% endblock main %}
+  

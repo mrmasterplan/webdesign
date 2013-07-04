@@ -1,0 +1,28 @@
+{% extends "page.html" %}
+
+{% block header %}
+<link href="/stylesheets/main.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/remove.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/comment.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/menu.css" rel="stylesheet" type="text/css" />
+<script src="/scripts/main.js" txpe="text/javascript"></script>
+
+{% endblock header %}
+
+
+{% block main %}
+<div id="remove_wrapper">
+	<div id="remove_warn">
+		<p>You have chosen to completely remove the following object an all it's sub-comments.</p>
+		<p>
+			You can choose 
+			<a href="/remove?id={{id}}&confirm=yes">to proceed with the operation</a>
+			or 
+			<a href="/">return to the main page</a>
+		</p>
+	</div>
+	<div id="removetext">
+	{{target}}
+	</div><!--end div maintext-->
+</div>
+{% endblock main %}

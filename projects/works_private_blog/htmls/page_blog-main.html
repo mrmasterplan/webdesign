@@ -1,0 +1,29 @@
+{% extends "page.html" %}
+
+{% block header %}
+<link href="/stylesheets/main.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/comment.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/menu.css" rel="stylesheet" type="text/css" />
+<script src="/scripts/main.js" txpe="text/javascript"></script>
+
+{% endblock header %}
+
+
+{% block main %}
+<div id="maintext">
+{{entries}}
+</div>
+
+<div id="menu_spacer"></div>
+<div id="menu_wrapper">
+	<div id="menu_top"></div>
+	<div id="menu_middle">
+	{% for entry in menu_entries %}
+		<a class="menu" href="#{{entry.link}}">{{entry.title}}</a><br/>
+	{% endfor %}
+		<a href="/new-blog-entry">New entry</a>
+		<a href="{{url}}">{{url_linktext}}</a>
+	</div>
+	<div id="menu_bottom"></div>
+</div>
+{% endblock main %}
